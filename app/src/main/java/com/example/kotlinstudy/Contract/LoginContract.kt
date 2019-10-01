@@ -1,6 +1,6 @@
-package com.example.kotlinstudy.Interface
+package com.example.kotlinstudy.Contract
 
-interface LoginInterface {
+interface LoginContract {
     interface View {
         fun setView()
         fun showToast(title: String)

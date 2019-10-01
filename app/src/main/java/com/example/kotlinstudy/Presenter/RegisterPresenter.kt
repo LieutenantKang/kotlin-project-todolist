@@ -3,15 +3,14 @@ package com.example.kotlinstudy.Presenter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.widget.Toast
 
-import com.example.kotlinstudy.Interface.RegisterInterface
+import com.example.kotlinstudy.Contract.RegisterContract
 import com.example.kotlinstudy.Model.UserModel
 import com.example.kotlinstudy.View.LoginActivity
 
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 
-class RegisterPresenter(private val view: RegisterInterface.View, private val context: Context, private val activity: Activity) : RegisterInterface.Presenter {
+class RegisterPresenter(private val view: RegisterContract.View, private val context: Context, private val activity: Activity) : RegisterContract.Presenter {
     private val userModel: UserModel = UserModel(context)
 
     override fun presenterView() {

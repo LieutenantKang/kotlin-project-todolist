@@ -4,17 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 
-import com.example.kotlinstudy.Interface.RegisterInterface
+import com.example.kotlinstudy.Contract.RegisterContract
 import com.example.kotlinstudy.Presenter.RegisterPresenter
 import com.example.kotlinstudy.R
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity(), RegisterInterface.View, View.OnClickListener {
-    private var presenter: RegisterInterface.Presenter? = null
+class RegisterActivity : AppCompatActivity(), RegisterContract.View, View.OnClickListener {
+    private var presenter: RegisterContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

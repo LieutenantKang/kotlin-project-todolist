@@ -2,9 +2,9 @@ package com.example.kotlinstudy.Presenter
 
 import android.content.Context
 
-import com.example.kotlinstudy.Interface.MainInterface
+import com.example.kotlinstudy.Contract.MainContract
 
-class MainPresenter(private val view: MainInterface.View, private val context: Context) : MainInterface.Presenter {
+class MainPresenter(private val view: MainContract.View, private val context: Context) : MainContract.Presenter {
     override fun presenterView() {
 
     }

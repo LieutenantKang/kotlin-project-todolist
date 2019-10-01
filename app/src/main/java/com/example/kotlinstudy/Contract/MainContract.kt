@@ -1,6 +1,6 @@
-package com.example.kotlinstudy.Interface
+package com.example.kotlinstudy.Contract
 
-interface MainInterface {
+interface MainContract {
     interface View {
         fun setView()
     }

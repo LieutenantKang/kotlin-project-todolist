@@ -8,7 +8,7 @@ import com.example.kotlinstudy.Room.UserDatabase
 
 import java.util.ArrayList
 
-class UserModel(private val context: Context) {
+class UserModel(context: Context) {
     private var database: UserDatabase = UserDatabase.getInstance(context)
     private var userDao: UserDao
 
