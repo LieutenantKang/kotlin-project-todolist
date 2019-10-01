@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 import com.example.kotlinstudy.Interface.RegisterInterface
 import com.example.kotlinstudy.Presenter.RegisterPresenter
@@ -36,5 +37,9 @@ class RegisterActivity : AppCompatActivity(), RegisterInterface.View, View.OnCli
 
     override fun setView() {
         register_register_button!!.setOnClickListener(this)
+    }
+
+    override fun showToast(title: String) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show()
     }
 }

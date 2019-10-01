@@ -28,8 +28,8 @@ class RegisterPresenter(private val view: RegisterInterface.View, private val co
                 activity.finish()
                 // 테스트를 위해 LoginActivity 로 이동. 추후 MainActivity 로 변경 예정
             }
-            "NotChecked" -> Toast.makeText(context, "비밀번호와 비밀번호 확인이 일치하지 않습니다", Toast.LENGTH_LONG).show()
-            else -> Toast.makeText(context, "동일한 이메일의 계정이 존재합니다", Toast.LENGTH_LONG).show()
+            "NotChecked" -> view.showToast("비밀번호와 비밀번호 확인이 일치하지 않습니다")
+            else -> view.showToast("동일한 이메일의 계정이 존재합니다")
         }
     }
 }

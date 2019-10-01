@@ -26,7 +26,7 @@ class LoginPresenter(private val view: LoginInterface.View, private val context:
             context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK))
             activity.finish()
         } else {
-            Toast.makeText(context, "일치하는 계정이 없습니다", Toast.LENGTH_LONG).show()
+            view.showToast("일치하는 계정이 없습니다")
         }
     }
 }

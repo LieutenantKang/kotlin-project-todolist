@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toast.makeText
 
 import com.example.kotlinstudy.Interface.LoginInterface
 import com.example.kotlinstudy.Presenter.LoginPresenter
@@ -42,5 +44,9 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View, View.OnClickList
     override fun setView() {
         login_login_button!!.setOnClickListener(this)
         login_register_button!!.setOnClickListener(this)
+    }
+
+    override fun showToast(title: String) {
+        Toast.makeText(this, title, Toast.LENGTH_SHORT).show()
     }
 }
