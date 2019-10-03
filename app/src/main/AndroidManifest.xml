@@ -3,21 +3,24 @@
     package="com.example.kotlinstudy">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.kotlinstudy.View.RegisterActivity"></activity>
-        <activity android:name="com.example.kotlinstudy.View.LoginActivity">
+        <activity android:name=".View.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.kotlinstudy.View.MainActivity"></activity>
+        <activity android:name=".View.RegisterActivity" />
+        <activity android:name=".View.LoginActivity"/>
+        <activity android:name=".View.MainActivity" />
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Context
 import com.example.kotlinstudy.Room.User
 import com.example.kotlinstudy.Room.UserDao
 import com.example.kotlinstudy.Room.UserDatabase
+import android.content.SharedPreferences
 
 import java.util.ArrayList
 
@@ -12,8 +13,22 @@ class UserModel(context: Context) {
     private var database: UserDatabase = UserDatabase.getInstance(context)
     private var userDao: UserDao
 
+    private var sharedPreferences : SharedPreferences? = null
+    private var editor : SharedPreferences.Editor? = null
+
     init {
         userDao = database.userDao
+        sharedPreferences = context.getSharedPreferences("pref", 0)
+    }
+
+    fun getAutoLogin():Boolean{
+        return sharedPreferences?.getBoolean("autoLogin",false) ?: false
+    }
+
+    fun saveAutoLogin(autoLogin:Boolean){
+        editor= sharedPreferences?.edit()
+        editor?.putBoolean("autoLogin",autoLogin)
+        editor?.commit()
     }
 
     fun checkLogin(email: String, pw: String): Boolean {
@@ -27,9 +42,13 @@ class UserModel(context: Context) {
             e.printStackTrace()
         }
 
-        return if (userList.size == 0) {
-            false
-        } else userList[0].email == email
+        return when {
+            userList.size==0 -> false
+            userList[0].email==email -> {
+                true
+            }
+            else -> false
+        }
     }
 
     fun signUp(email: String, pw: String, pwCheck: String): String {
@@ -54,5 +73,15 @@ class UserModel(context: Context) {
         val user = User(email, pw)
         Thread { database.userDao.insert(user) }.start()
         return "Success"
+    }
+
+    fun saveEmail(email: String){
+        editor= sharedPreferences?.edit()
+        editor?.putString("userEmail",email)
+        editor?.commit()
+    }
+
+    fun getSavedEmail(): String? {
+        return sharedPreferences?.getString("userEmail","")
     }
 }

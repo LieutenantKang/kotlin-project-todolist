@@ -8,6 +8,7 @@ interface LoginContract {
 
     interface Presenter {
         fun presenterView()
-        fun Login(email: String, pw: String)
+        fun login(email: String, pw: String, autoLogin:Boolean)
+        fun showEmail():String?
     }
 }

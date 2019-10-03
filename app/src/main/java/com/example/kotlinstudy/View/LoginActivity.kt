@@ -21,6 +21,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
 
         presenter = LoginPresenter(this@LoginActivity, applicationContext, this)
         presenter!!.presenterView()
+
+        login_email.setText(presenter!!.showEmail())
     }
 
     override fun onClick(v: View) {
@@ -28,7 +30,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
             R.id.login_login_button -> {
                 val email = login_email.text.toString()
                 val pw = login_pw.text.toString()
-                presenter!!.Login(email, pw)
+                val autoLogin = login_auto.isChecked
+                presenter!!.login(email, pw, autoLogin)
             }
             R.id.login_register_button -> {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
