@@ -1,17 +1,13 @@
 package com.example.kotlinstudy.View
 
-import androidx.appcompat.app.AppCompatActivity
-
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-
 import com.example.kotlinstudy.Contract.RegisterContract
 import com.example.kotlinstudy.Presenter.RegisterPresenter
 import com.example.kotlinstudy.R
 import kotlinx.android.synthetic.main.activity_register.*
 
-class RegisterActivity : AppCompatActivity(), RegisterContract.View, View.OnClickListener {
+class RegisterActivity : BaseActivity(), RegisterContract.View, View.OnClickListener {
     private var presenter: RegisterContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +31,5 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View, View.OnClic
 
     override fun setView() {
         register_register_button!!.setOnClickListener(this)
-    }
-
-    override fun showToast(title: String) {
-        Toast.makeText(this, title, Toast.LENGTH_SHORT).show()
     }
 }
