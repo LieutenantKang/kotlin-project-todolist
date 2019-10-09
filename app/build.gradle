@@ -42,6 +42,7 @@ dependencies {
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation "androidx.room:room-testing:2.2.0-rc01"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 repositories {
     mavenCentral()
