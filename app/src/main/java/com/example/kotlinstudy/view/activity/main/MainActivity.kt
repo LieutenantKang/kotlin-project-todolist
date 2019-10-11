@@ -20,17 +20,10 @@ class MainActivity : BaseActivity(), MainContract.View {
     private val memoAdapter: MemoAdapter by lazy { MemoAdapter(this) }
 
     override fun initView() {
-        presenter = MainPresenter(this).apply {
-            view = this@MainActivity
-            adapterModel = memoAdapter
-            adapterView = memoAdapter
-        }
+        presenter = MainPresenter(this)
 
         presenter.start()
-        presenter.presenterView()
-        presenter.loadMemos(this, false)
-
-        setRecyclerView()
+        presenter.loadMemos(false)
     }
 
     override fun onClickEvent() {
@@ -45,16 +38,16 @@ class MainActivity : BaseActivity(), MainContract.View {
         }
     }
 
-    private fun setRecyclerView() {
+    // region mvp
+    override lateinit var presenter: MainContract.Presenter
+
+    override fun isViewActive(): Boolean = checkActive()
+
+    override fun setRecyclerView() {
         main_recycler_view.apply {
             this.adapter = memoAdapter
             this.layoutManager = LinearLayoutManager(this@MainActivity)
         }
     }
-
-    // region mvp
-    override lateinit var presenter: MainContract.Presenter
-
-    override fun isViewActive(): Boolean = checkActive()
 // endregion
 }

@@ -6,6 +6,7 @@ import com.example.kotlinstudy.view.adapter.AdapterContract
 class MainPresenter(private val view: MainContract.View) : MainContract.Presenter {
     override fun start() {
         view.presenter = this
+        view.setRecyclerView()
     }
 
 //    override var model : MemoModel = MemoModel(context)
