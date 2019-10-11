@@ -2,12 +2,14 @@ package com.example.kotlinstudy.data.model
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.kotlinstudy.App
 import com.example.kotlinstudy.data.room.User
 import com.example.kotlinstudy.data.room.UserDao
 import com.example.kotlinstudy.data.room.UserDatabase
 import java.util.*
 
-class UserModel(context: Context) {
+class UserModel {
+    private val context: App = App.getInstance()
     private var database: UserDatabase = UserDatabase.getInstance(context)
     private var userDao: UserDao
 
