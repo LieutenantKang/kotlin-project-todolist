@@ -43,7 +43,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener {
         when (v.id) {
             R.id.main_create_button -> {
                 val intent = Intent(this@MainActivity, WriteActivity::class.java)
-                startIntent(intent)
+                startActivityForResult(intent,1000)
             }
             R.id.main_delete_button -> {
 
@@ -54,5 +54,13 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener {
     override fun setView() {
         main_create_button!!.setOnClickListener(this)
         main_delete_button!!.setOnClickListener(this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode==RESULT_OK){
+            if(requestCode==1000)
+                presenter.loadMemos(this,false)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

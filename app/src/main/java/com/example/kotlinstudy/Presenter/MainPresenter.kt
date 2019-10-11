@@ -13,6 +13,10 @@ class MainPresenter(private val mainView: MainContract.View, private val context
     override lateinit var adapterModel: AdapterContract.Model
     override lateinit var adapterView: AdapterContract.View
 
+    override fun presenterView() {
+        view.setView()
+    }
+
     override fun loadMemos(context: Context, isClear: Boolean) {
         model.getMemos().let{
             if(isClear){
@@ -21,9 +25,5 @@ class MainPresenter(private val mainView: MainContract.View, private val context
             adapterModel.addItems(it)
             adapterView.notifyAdapter()
         }
-    }
-
-    override fun presenterView() {
-
     }
 }
