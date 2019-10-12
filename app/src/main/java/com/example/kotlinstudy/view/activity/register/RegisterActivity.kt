@@ -24,6 +24,12 @@ class RegisterActivity : BaseActivity(), RegisterContract.View {
             val email = register_email.text.toString()
             val pw = register_pw.text.toString()
             val pwCheck = register_pwCheck.text.toString()
+
+            if(email.isEmpty() || pw.isEmpty() || pwCheck.isEmpty()) {
+                showToast("입력을 정확히 해주세요.")
+                return@setOnClickListener
+            }
+
             presenter.signUp(email, pw, pwCheck)
         }
     }
@@ -35,14 +41,6 @@ class RegisterActivity : BaseActivity(), RegisterContract.View {
 
     override fun showToastMessage(msg: String) { showToast(msg) }
 
-    override fun getResult(result: String) {
-        when (result) {
-            "Success" -> {
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
-            "NotChecked" -> showToast("비밀번호와 비밀번호 확인이 일치하지 않습니다")
-            else -> showToast("동일한 이메일의 계정이 존재합니다")
-        }
-    }
+    override fun passSignUp() { startActivity(Intent(this, LoginActivity::class.java)) }
     // endregion
 }

@@ -6,7 +6,7 @@ class LoginPresenter(private val view: LoginContract.View) : LoginContract.Prese
         view.presenter = this
     }
 
-//    private val userModel: UserModel = UserModel(context)
+//    private val userModel: RegisterModel = RegisterModel(context)
 
 //    override fun presenterView() {
 //        view.setView()
