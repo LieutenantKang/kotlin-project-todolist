@@ -1,15 +1,19 @@
 package com.example.kotlinstudy.Adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinstudy.Contract.AdapterContract
 import com.example.kotlinstudy.R
 import com.example.kotlinstudy.Room.Memo
+import com.example.kotlinstudy.View.UpdateActivity
 import kotlinx.android.synthetic.main.item_memo.view.*
 
 class MemoAdapter(val context: Context) : AdapterContract.View, AdapterContract.Model, RecyclerView.Adapter<MemoAdapter.MemoViewHolder>() {
@@ -19,8 +23,14 @@ class MemoAdapter(val context: Context) : AdapterContract.View, AdapterContract.
     override fun onBindViewHolder(holder: MemoViewHolder, position: Int) {
         memoList[position].let{ item ->
             with(holder) {
-                tvTitle.text = item.title
+                memoTitle.text = item.title
             }
+        }
+
+        holder.memoLayout.setOnClickListener {
+            val intent = Intent(context, UpdateActivity::class.java)
+            intent.putExtra("memo_id", memoList.get(position).id)
+            (context as Activity).startActivityForResult(intent, 1000)
         }
     }
 
@@ -45,6 +55,8 @@ class MemoAdapter(val context: Context) : AdapterContract.View, AdapterContract.
     }
 
     inner class MemoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvTitle: TextView = view.item_memo_title
+        val memoTitle: TextView = view.item_memo_title
+        val memoLayout: LinearLayout = view.item_layout
     }
+
 }

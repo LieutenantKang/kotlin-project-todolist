@@ -7,6 +7,12 @@ import androidx.room.Query
 
 @Dao
 interface MemoDao {
+    @Query("DELETE FROM memo WHERE id = (:id)")
+    fun deleteMemo(id: Int)
+
+    @Query("SELECT * FROM memo WHERE id = (:id)")
+    fun getMemo(id: Int) : Memo
+
     @Query("SELECT * FROM memo")
     fun getMemos(): List<Memo>
 

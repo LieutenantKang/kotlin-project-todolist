@@ -13,14 +13,49 @@ class MemoModel(context: Context) {
         memoDao = database.memoDao
     }
 
+    fun updateMemo(id: Int, memo: Memo){
+        val deleteMemoThread = Thread { memoDao.deleteMemo(id) }
+        deleteMemoThread.start()
+
+        try{
+            deleteMemoThread.join()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        val insertMemoThread = Thread { memoDao.insert(memo) }
+        insertMemoThread.start()
+
+        try{
+            insertMemoThread.join()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getMemo(id: Int) : Memo{
+        var memo = Memo()
+
+        val getMemoThread = Thread { memo = memoDao.getMemo(id)}
+        getMemoThread.start()
+
+        try{
+            getMemoThread.join()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        return memo
+    }
+
     fun getMemos(): ArrayList<Memo> {
         val memoList = ArrayList<Memo>()
 
-        val insertMemoThread = Thread { memoList.addAll(memoDao.getMemos()) }
-        insertMemoThread.start()
+        val getMemosThread = Thread { memoList.addAll(memoDao.getMemos()) }
+        getMemosThread.start()
 
         try {
-            insertMemoThread.join()
+            getMemosThread.join()
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
