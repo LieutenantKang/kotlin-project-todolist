@@ -66,4 +66,8 @@ class MemoModel(context: Context) {
     fun insertMemo(memo: Memo) {
         Thread { database.memoDao.insert(memo) }.start()
     }
+
+    fun deleteMemo(id : Int){
+        Thread {database.memoDao.deleteMemo(id)}.start()
+    }
 }

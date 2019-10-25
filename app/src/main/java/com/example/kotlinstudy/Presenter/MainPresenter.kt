@@ -26,4 +26,9 @@ class MainPresenter(private val mainView: MainContract.View, private val context
             adapterView.notifyAdapter()
         }
     }
+
+    override fun removeItem(position: Int) {
+        model.deleteMemo(adapterModel.getMemoId(position))
+        adapterModel.removeItem(position)
+    }
 }

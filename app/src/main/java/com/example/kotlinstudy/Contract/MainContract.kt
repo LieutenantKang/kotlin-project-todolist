@@ -18,5 +18,7 @@ interface MainContract {
         fun presenterView()
 
         fun loadMemos(context: Context, isClear: Boolean)
+
+        fun removeItem(position : Int)
     }
 }

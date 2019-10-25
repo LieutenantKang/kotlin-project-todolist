@@ -10,5 +10,7 @@ interface AdapterContract {
     interface Model{
         fun addItems(memos : ArrayList<Memo>)
         fun clearItem()
+        fun removeItem(position : Int)
+        fun getMemoId(position: Int) : Int
     }
 }

@@ -59,4 +59,11 @@ class MemoAdapter(val context: Context) : AdapterContract.View, AdapterContract.
         val memoLayout: LinearLayout = view.item_layout
     }
 
+    override fun getMemoId(position: Int): Int {
+        return memoList[position].id
+    }
+
+    override fun removeItem(position: Int) {
+        memoList.removeAt(position)
+    }
 }

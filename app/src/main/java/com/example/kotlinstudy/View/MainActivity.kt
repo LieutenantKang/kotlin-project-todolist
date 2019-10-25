@@ -3,6 +3,7 @@ package com.example.kotlinstudy.View
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinstudy.Adapter.MemoAdapter
 import com.example.kotlinstudy.Contract.MainContract
@@ -45,15 +46,29 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener {
                 val intent = Intent(this@MainActivity, WriteActivity::class.java)
                 startActivityForResult(intent,1000)
             }
-            R.id.main_delete_button -> {
-
-            }
         }
     }
 
     override fun setView() {
         main_create_button!!.setOnClickListener(this)
-        main_delete_button!!.setOnClickListener(this)
+
+        var itemTouchHelper = ItemTouchHelper(createItemTouchCallback())
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    private fun createItemTouchCallback() : ItemTouchHelper.SimpleCallback {
+        var helper = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                presenter.removeItem(position)
+                recyclerView.adapter!!.notifyDataSetChanged()
+            }
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false
+            }
+        }
+
+        return helper
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
