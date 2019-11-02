@@ -2,9 +2,17 @@ package com.example.kotlinstudy.Model
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import com.example.kotlinstudy.Retrofit.Request.RegisterUserRequest
+import com.example.kotlinstudy.Retrofit.Response.RegisterUserResponse
+import com.example.kotlinstudy.Retrofit.RetrofitGenerator
 import com.example.kotlinstudy.Room.User
 import com.example.kotlinstudy.Room.UserDao
 import com.example.kotlinstudy.Room.UserDatabase
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class UserModel(context: Context) {
@@ -49,28 +57,46 @@ class UserModel(context: Context) {
         }
     }
 
-    fun signUp(email: String, pw: String, pwCheck: String): String {
-        val userList = ArrayList<User>()
-        val signUpThread = Thread { userList.addAll(userDao.findUser(email)) }
-        signUpThread.start()
+    fun signUp(email: String, pw: String, pwCheck: String): String? {
+        val userRequest = RegisterUserRequest(email, pw, pwCheck)
+        val call = RetrofitGenerator.create().registerUser(userRequest)
+        var result : String? = null
+        call.enqueue(object : Callback<RegisterUserResponse> {
+            override fun onResponse(call: Call<RegisterUserResponse>, response: Response<RegisterUserResponse>) {
+                Log.d("success", response.body()?.id.toString())
+                result = "Success"
+            }
+            override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
+                Log.d("fail", "failed")
+                result = "Failure"
+            }
+        })
 
-        try {
-            signUpThread.join()
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
 
-        if (userList.size != 0) {
-            return "Already" // 내부 DB Room 통해 데이터 존재 여부 확인
-        }
+        return result
 
-        if (pw != pwCheck) {
-            return "NotChecked"
-        }
 
-        val user = User(email, pw)
-        Thread { database.userDao.insert(user) }.start()
-        return "Success"
+//        val userList = ArrayList<User>()
+//        val signUpThread = Thread { userList.addAll(userDao.findUser(email)) }
+//        signUpThread.start()
+//
+//        try {
+//            signUpThread.join()
+//        } catch (e: InterruptedException) {
+//            e.printStackTrace()
+//        }
+//
+//        if (userList.size != 0) {
+//            return "Already" // 내부 DB Room 통해 데이터 존재 여부 확인
+//        }
+//
+//        if (pw != pwCheck) {
+//            return "NotChecked"
+//        }
+//
+//        val user = User(email, pw)
+//        Thread { database.userDao.insert(user) }.start()
+//        return "Success"
     }
 
     fun saveEmail(email: String) {

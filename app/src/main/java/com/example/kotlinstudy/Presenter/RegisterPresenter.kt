@@ -20,8 +20,7 @@ class RegisterPresenter(private val view: RegisterContract.View, private val con
                 val intent = Intent(context, LoginActivity::class.java)
                 view.startIntent(intent)
             }
-            "NotChecked" -> view.showToast("비밀번호와 비밀번호 확인이 일치하지 않습니다")
-            else -> view.showToast("동일한 이메일의 계정이 존재합니다")
+            else -> view.showToast("가입에 실패했습니다")
         }
     }
 }
