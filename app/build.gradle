@@ -44,6 +44,10 @@ dependencies {
     testImplementation "androidx.room:room-testing:2.2.0-rc01"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "android.arch.work:work-runtime-ktx:1.0.1"
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
 }
 repositories {
     mavenCentral()
