@@ -1,4 +1,3 @@
 package com.example.kotlinstudy.Retrofit.Response
 
-class RegisterUserResponse (val id: Int, val username: String) {
-}
+data class RegisterUserResponse (var id: Int, var username: String)

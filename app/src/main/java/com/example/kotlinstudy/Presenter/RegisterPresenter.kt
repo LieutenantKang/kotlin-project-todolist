@@ -7,7 +7,7 @@ import com.example.kotlinstudy.Contract.RegisterContract
 import com.example.kotlinstudy.Model.UserModel
 import com.example.kotlinstudy.View.LoginActivity
 
-class RegisterPresenter(private val view: RegisterContract.View, private val context: Context, private val activity: Activity) : RegisterContract.Presenter {
+class RegisterPresenter(private val view: RegisterContract.View, private val context: Context, private val activity: Activity) : RegisterContract.Presenter, RegisterContract.Model.OnFinishedListener {
     private val userModel: UserModel = UserModel(context)
 
     override fun presenterView() {
@@ -15,12 +15,20 @@ class RegisterPresenter(private val view: RegisterContract.View, private val con
     }
 
     override fun signUp(email: String, pw: String, pwCheck: String) {
-        when (userModel.signUp(email, pw, pwCheck)) {
-            "Success" -> {
+        userModel.signUp(this, email, pw, pwCheck)
+    }
+
+    override fun onFinished(id: Int) {
+        when(id){
+            1->{
                 val intent = Intent(context, LoginActivity::class.java)
                 view.startIntent(intent)
             }
-            else -> view.showToast("가입에 실패했습니다")
+            0 -> view.showToast("가입에 실패했습니다")
         }
+    }
+
+    override fun onFailure(t: Throwable) {
+        view.showToast("가입에 실패했습니다")
     }
 }
